@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Projeto</title>
+</head>
+<body>
+
+    <header>
+        <div class="title">
+            <h2>Consultas</h2>
+        </div>
+        <div class="banner">
+            <img src = "imgs/clinic.jpg" style="float:middle;width:70%;height:100%;">
+        </div>
+    </header>
+
+    <section class="newSchedules">
+        <input type="text" id="newDoctor2" placeholder="Doutor:">
+        <input type="text" id="newPatient2" placeholder="Nome do Paciente:">
+        <input type="text" id="newHealthcare2" placeholder="Plano de sáude:">
+        <input type="text" id="newClinic2" placeholder="Clínica:">
+        <input type="text" id="newContact2" placeholder="Telefone:">
+        <input type="text" id="newScheduleDate2" placeholder="Dia:">
+        <input type="text" id="newScheduleTime2" placeholder="Horário:">
+        <span onclick="newItem()" class="addBtn">Adicionar</span>
+    </section>
+
+<!-- Tabela com items existentes -->
+    <section class="schedules">
+        <table id="myTable">
+            <tr>
+                <th>Doutor</th>
+                <th>Paciente</th>
+                <th>Dia</th>
+                <th>Horário</th>
+                <th>Plano médico</th>
+                <th>Clinica</th>
+                <th>Contato</th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+            </tr>
+        </table>
+    </section>
+
+    <div class = "container">
+        <div class = "doctorContainer">
+        
+
+            <div class="wrapper">
+                <select name="" id="newDoctor" class="formScroll" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                </select>
+            </div>
+
+            <div class="wrapper">
+                <select name="" id="newClinic" class="formScroll" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+            </select>
+            </div>
+
+        </div>
+        <div class="schedule_container"></div>
+        <form name="schedulerForm" class = "confirmSchedule" >
+            <input class = "formField" type="text" id="newCPF" placeholder="CPF do Paciente:">
+            <input class = "formField" type="text" id="newPatient" placeholder="Nome do Paciente:">
+            <input class = "formField" type="text" id="newHealthcare" placeholder="Plano de sáude:">
+            <input class = "formField" type="text" id="newContact" placeholder="Telefone:">
+            <input class = "formField" type="text" id="newScheduleDate" placeholder="Dia:">
+            <input class = "formField" type="text" id="newScheduleTime" placeholder="Horário:">
+            <div onclick="newItem()" class = "formField" id = "addBtn">Adicionar</div>
+        </form>
+            
+    </div>
+    
+    
+        
+      
+    <script src="scripts.js"></script>
+
+</body>
+</html>
