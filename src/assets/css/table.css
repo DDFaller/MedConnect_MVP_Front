@@ -1,0 +1,52 @@
+.table-schedules{
+    margin-top: 0;
+    width: 100px;
+}
+
+.table-overlay{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 10px;
+    font-size: 18px;
+    transition: 0.2s;
+    text-align: start;
+}
+
+table{
+    background-color: white;
+    width: 50%;
+}
+
+tr:nth-child(odd){
+    background-color: #eee;
+}
+
+th:nth-child(1){
+    width: 80%;
+}
+
+tr:hover {
+    background: rgb(200, 199, 199);
+}
+
+.update-table{
+    padding: 4px;
+    background-color: #bfbcbc;
+    align-self: flex-start;
+    border-radius: 10px;
+    top:0;
+    margin: 2px;
+    float: right;
+    cursor: pointer;
+  }

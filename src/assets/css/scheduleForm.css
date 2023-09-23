@@ -1,22 +1,22 @@
 .confirmSchedule{
   width: 100%;
   height: fit-content;
-  margin-right: 0;
-  margin-left: 10%;
   margin-top: 5%;
-  margin-bottom: auto;
   float: right;
   padding: 10px;
-  background:linear-gradient(#007BFF,#00BCD4);
-  visibility: visible;
   border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  margin:auto;
 }
 
 .formField{
   margin: 5px;
   border-radius: 10px;
-  width: 80%;
+  width: 90%;
   height: 40px;
+  margin-left: auto;
+  margin-right: auto;;
 }
 
 #addBtn[class="formField"] {
@@ -24,11 +24,15 @@
   width: 30%;
   height: 40px;
   padding: 9px 10px;
-  background-color:  #3F51B5;
-  color: white;
+  background-color:  #4E0090;
+  color: whitesmoke;
   text-align: center;
   font-size: 16px;
   transition: 0.3s;
   cursor: pointer;
-  margin-top: 20%;
+  margin-top: 5%;
+}
+
+.option-text{
+  margin-left: 20px;
 }

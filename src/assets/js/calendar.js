@@ -1,8 +1,35 @@
+let infoCard = ` 
+        <div class='info-overlay'> \
+            <div id='info-overlay'>      \
+                    <br>
+                    <h2 >Médico</h2> \
+                    <span class="info-data" id="infoCrm">CRM: </span><br>        \
+                    
+                    <h2>Clinica</h2>
+                    <span class="info-data" id="infoClinic">Clinica: </span><br>     \
+                    <span class="info-data" id="infoClinicId">Id Clinica: </span><br>       \
+                    
+                    <h3>Agendamento</h3> \
+                    <span class="info-data" id="infoScheduleDate">Dia: </span><br>        \
+                    <span class="info-data" id="infoScheduleTime">Horário: </span><br>      \
+                    <span class="info-data" id="infoStatus">Status: </span> <br>     
+
+                    <h2>Paciente</h2>
+                    <span class="info-data" id="infoCPF">CPF: </span> <br>       \
+                    <span class="info-data" id="infoPacient">Nome paciente: </span> <br>       \
+                    <span class="info-data" id="infoConcact">Contato: </span><br>        \
+                    <span class="info-data" id="infoHealthcare">Plano: </span> <br><br>      \
+            </div>      \
+        </div>      \
+
+
+
+` 
 /*
   --------------------------------------------------------------------------------------
   UTILS: Função para criação dinamica de elementos no body
   --------------------------------------------------------------------------------------
-  */
+*/
 
 const twoDigitsString = (number) =>{
   return ("0"+number.toLocaleString("en-US",{minimumIntegerDigits:2})).slice(-2)
@@ -40,6 +67,7 @@ const generateCalendar = () => {
     generateCalendarHeader(newDiv,currentDayOfWeek);
     cards = generateCalendarHourCards(newDiv,task_date,appointmentsPerDay,startHour,appointmentTimeInMinutes,onHourCardClicked);
     generateRemoveBtnForEachCard(cards);
+    generateInfoForEachCard(cards);
   } 
 }
 
@@ -89,11 +117,30 @@ const generateRemoveBtnForEachCard = (listCards) =>{
                                                   "class": "delete-btn",
                                                   "id": "delete-btn"})
     removeBtn.onclick = function(e){
+      
       deleteItem();
       e.stopPropagation();
     }
   });
 }
+
+const generateInfoForEachCard = (listCards) =>{
+  listCards.forEach(element => {
+    infoBtn = generateElement("button",element,{"task_time": element.getAttribute("task_time"),
+                                                  "task_date": element.getAttribute("task_date"),
+                                                  "class": "info-btn",
+                                                  "id": "info-btn"})
+    infoBtn.onclick = function(e){
+      popUp = createPopUp(infoBtn, ()=>{});
+      popUp.innerHTML += infoCard;
+      popUp.style.width = "250px";
+      findSchedule();
+      overlayIn();
+      e.stopPropagation();
+    }
+  });
+}
+
 
 const createAppointmentTimeNotes = (calendar,appointmentsPerDay,startingHour,finishingHour,appointmentDuration) => {
   newDiv = document.createElement("div")
@@ -114,9 +161,6 @@ const createAppointmentTimeNotes = (calendar,appointmentsPerDay,startingHour,fin
 
 
 const findCalendarElement = (schedule_date,schedule_time) =>{
-  schedule_time = schedule_time.slice(0,-3);
-  schedule_date = new Date(schedule_date)
-  schedule_date = schedule_date.toLocaleString().split(",")[0]
   console.log(schedule_date)
   console.log(schedule_time)
   founded = document.querySelector('[task_date="'+schedule_date+'"][task_time="'+schedule_time+'"]');
@@ -135,9 +179,55 @@ const onHourCardClicked = (e) =>{
   
   console.log(clicked_date);
   console.log(clicked_time);
-  e.target.setAttribute("id","scheduling");
+  currentScheduling = document.getElementById("scheduling")
+  if (document.getElementById("scheduling") !== null){
+    currentScheduling.removeAttribute("id");
+  }
+  if (e.target.getAttribute("id") !== "unavailable"){
+    e.target.setAttribute("id","scheduling");
+  }
   showScheduleForm(clicked_time,clicked_date);
+  
 }
 
+
+/*
+  --------------------------------------------------------------------------------------
+  Função a ser executada para prencher dados do cartao de info
+  --------------------------------------------------------------------------------------
+*/
+
+const fillInfoCard = (data) =>{
+  console.log(data)
+  doctor_crm = document.getElementById('infoCrm');
+  clinic = document.getElementById('infoClinic');
+  clinic_id = document.getElementById('infoClinicId');
+  scheduleDate = document.getElementById('infoScheduleDate');
+  scheduleTime = document.getElementById('infoScheduleTime');
+  scheduleStatus = document.getElementById('infoStatus');
+  cpf = document.getElementById('infoCPF');
+  pacient = document.getElementById('infoPacient');
+  contact = document.getElementById('infoContact');
+  healthcare = document.getElementById('infoHealthcare');
+
+  doctor_crm.textContent += data.Doutor
+  clinic.textContent += data.Consultorio
+  clinic_id.textContent += data.Consultorio_id
+  scheduleDate.textContent  += data.Dia
+  scheduleTime.textContent  += data.Horario
+  cpf.textContent  += data.CPF
+  pacient.textContent  += data.Paciente
+  contact.textContent  += data.Contato
+  healthcare.textContent += data.Plano
+  scheduleStatus.textContent += data.Status
+
+  
+}
+
+
+
+const changeCalendarVisualization = () =>{
+  return "";
+}
 
 generateCalendar();

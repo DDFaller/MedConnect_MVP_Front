@@ -9,48 +9,64 @@
     <link rel="stylesheet" href="src/assets/css/options.css">
     <link rel="stylesheet" href="src/assets/css/scheduleForm.css">
     <link rel="stylesheet" href="src/assets/css/calendar.css">
-
+    <link rel="stylesheet" href="src/assets/css/login.css">
+    <link rel="stylesheet" href="src/assets/css/table.css">
+    <link rel="stylesheet" href="src/assets/css/overlay.css">
     <title>Projeto</title>
 </head>
 <body>
-
     <section class="header">
         <h1>MedConnect</h1>
         <p>Diminuindo o tempo de espera e agilizando consultas</p>
         <a class="btn-bgstroke" href="#schedule_container">Agendar consulta</a>
     </section>
-
+    <div class="dim" id="overlay" onclick="overlayOut()"></div>
     <div class = "container">
+
+        <!-- Opções de selção e formulário de dados -->
         <div class = "doctorContainer">
-            <h3>
+            <h3 class="option-text">
                 Doutores:
             </h3>
             <div class="wrapper">
                 <select name="" id="newDoctor" class="formScroll" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                 </select>
             </div>
-            <h3>
+            <h3 class="option-text">
                 Clínicas:
             </h3>
             <div class="wrapper">
                 <select name="" id="newClinic" class="formScroll" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
             </select>
             </div>
+
+            <!-- Formulário de dados -->
+            <form name="schedulerForm" class = "confirmSchedule" >
+                <h3>Insira seus dados:</h3>
+                <input class = "formField" type="text" id="newCPF" placeholder=" CPF do Paciente:">
+                <input class = "formField" type="text" id="newPatient" placeholder=" Nome do Paciente:">
+                <input class = "formField" type="text" id="newHealthcare" placeholder=" Plano de sáude:">
+                <input class = "formField" type="text" id="newContact" placeholder=" Telefone:">
+                <input class = "formField" type="text" id="newScheduleDate" placeholder=" Dia:">
+                <input class = "formField" type="text" id="newScheduleTime" placeholder=" Horário:">
+                <div onclick="newItem()" class = "formField" id = "addBtn">Adicionar</div>
+            </form>
         </div>
+
+        <!-- Calendário -->
         <div class="schedule_container" id="schedule_container"></div>
-        <form name="schedulerForm" class = "confirmSchedule" >
-            <input class = "formField" type="text" id="newCPF" placeholder="CPF do Paciente:">
-            <input class = "formField" type="text" id="newPatient" placeholder="Nome do Paciente:">
-            <input class = "formField" type="text" id="newHealthcare" placeholder="Plano de sáude:">
-            <input class = "formField" type="text" id="newContact" placeholder="Telefone:">
-            <input class = "formField" type="text" id="newScheduleDate" placeholder="Dia:">
-            <input class = "formField" type="text" id="newScheduleTime" placeholder="Horário:">
-            <div onclick="newItem()" class = "formField" id = "addBtn">Adicionar</div>
-        </form>
-    
+
+        <!-- Tabela com items existentes -->
+        <div class="table-schedules">
+            <div class="update-table" onclick="expandTable()">Visualizar como tabela</div>
+        </div>
+        
+
     
     <div class="background">
-        X
+        <footer>
+            <h2>Daniel Faller,<p>MVP Engenheria de software</p></h2>
+        </footer>
     </div>
 
     <script src="src/api.js"></script>
@@ -58,6 +74,9 @@
     <script src="src/assets/js/options.js"></script>
     <script src="src/assets/js/calendar.js"></script>
     <script src="src/assets/js/scheduleForm.js"></script>
+    <script src="src/assets/js/login.js"></script>
+    <script src="src/assets/js/table.js"></script>
+    <script src="src/assets/js/overlay.js"></script>
     
 </body>
 </html>

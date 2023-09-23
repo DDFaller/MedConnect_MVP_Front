@@ -1,10 +1,10 @@
 .schedule_container{
   display: flex;
-  background:linear-gradient(#007BFF,#00BCD4);
+  background: linear-gradient(#4E0090,#7F27C9);
   padding: 1rem;
-  margin-left: 10%;
   border-radius: 30px;
   margin-bottom: 40%;
+  margin-right: -18px;
 }
 
 .part_day{
@@ -13,7 +13,7 @@
 }
 
 .task {
-  background-color: #F5F5F5 ;
+  background-color: whitesmoke ;
   height: 70px;
   width: 100px;
   margin: 5px;
@@ -46,14 +46,14 @@
   width: 100px;
   height: 70px;
   border: 1px solid  #3F51B5;
-  background: #103783;
+  background: #5565BC;
   color: white;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 2px;
-  padding: 20px;
   border-radius: 10px;
+  line-height: 70px;
+  margin-bottom: 5%;
 }
 
 #unavailable[class="task"]{
@@ -68,12 +68,66 @@
 }
 
 .delete-btn{
-  padding: 10px;
-  width: 10px;
-  height: 10px;
-  background-color: #f44336;
+  padding: 4px;
+  height: 100%;
+  background-color: #bfbcbc;
   align-self: flex-start;
   position: absolute;
   top: 0;
   right: 0;
+  border-radius: 10px;
+}
+
+.delete-btn:hover{
+  padding: 8px;
+  animation: expand 0.3s ease;
+  display: flex;
+}
+
+@keyframes expand{
+  from {
+    padding: 4px;
+  }
+  to{
+    padding: 8px;
+  }
+}
+.info-btn{
+  padding: 8px;
+  height: 20%;
+  background-color: #50b8de;
+  align-self: flex-start;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.info-btn:hover{
+  padding: 8px;
+  animation: expand-info 0.3s ease-in-out;
+  display: flex;
+}
+
+@keyframes expand-info{
+  from {
+    padding: 8px;
+  }
+  to{
+    padding: 12px;
+  }
+}
+
+.info-overlay{
+  background-color: whitesmoke;
+  width: 200px;
+  margin: auto;
+  text-align: start;
+  padding: 4px;
+}
+
+
+.info-data{
+  background-color: whitesmoke;
+  font-size: 12px;
 }

@@ -1,3 +1,6 @@
+cpf = ""
+password = ""
+
 /*
   --------------------------------------------------------------------------------------
   UTILS: Função para criação dinamica de elementos no body

@@ -1,0 +1,44 @@
+.user-btn {
+  font-size: 20px;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 300;
+  color: white;
+  text-decoration: none;
+  float: right;
+  margin: 5px;
+  margin-top: 0;
+}
+
+.formUserField{
+  border-radius: 10px;
+  width: 90%;
+  height: 40px;
+  z-index: 100;
+  margin-bottom: 5px;
+}
+
+.userSubmit{
+  border-radius: 10px;
+  width: 60%;
+  height: 40px;
+  padding: 9px 10px;
+  background-color:  white;
+  color: #4E0090;
+  text-align: center;
+  font-size: 16px;
+  transition: 0.3s;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  border-color: white;
+  border-width: 2px;
+}
+.userSubmit:hover{
+  background-color:  #4E0090;
+  color: white;
+  border-width: 2px;
+}

@@ -1,3 +1,4 @@
+
 var removeOptions = (selectElement) => {
   var i, L = selectElement.options.length - 1;
   for(i = L; i >= 0; i--) {
@@ -11,16 +12,24 @@ var removeOptions = (selectElement) => {
 */
 var getList =  async function() {
   let url = 'http://127.0.0.1:5000/agendamentos';
-  fetch(url, {
+  element = document.getElementById("myTable")
+  if (element !== null){
+    clearTable();
+  }
+  request = fetch(url, {
     method: 'get',
   })
     .then((response) => response.json())
     .then((data) => {
-      data.agendamentos.forEach(item => insertList(item.Doutor, item.Paciente, item.Plano,item.Consultorio, item.Contato, item.Dia, item.Horario))
+      data.agendamentos.forEach(item => insertList(
+        item.Doutor, item.Dia, item.Horario,item.Consultorio_id,
+        item.Consultorio,item.Status,item.CPF, item.Conttato, item.Paciente,item.Plano))
+
     })
     .catch((error) => {
       console.error('Error:', error);
     });
+  return request.response;
 };
 
 
@@ -31,7 +40,7 @@ var getList =  async function() {
 */
 var getDoctors = async function() {
   let url = 'http://127.0.0.1:5000/doutores';
-  fetch(url, {
+  request = fetch(url, {
     method: 'get',
   })
     .then((response) => response.json())
@@ -41,7 +50,8 @@ var getDoctors = async function() {
     .catch((error) => {
       console.error('Error:', error);
     });
-  };
+  return request.response;
+};
 
 /*
   --------------------------------------------------------------------------------------
@@ -66,7 +76,15 @@ var postItem = function(inputDoctor,inputClinic,inputClinicID, inputCPF, inputPa
     method: 'post',
     body: formData
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status == '200'){
+        e = document.getElementById('scheduling');
+        e.removeAttribute("scheduling");
+        e.setAttribute("id","unavailable")
+      }  
+      
+      response.json();
+    })
     .catch((error) => {
       console.error('Error:', error);
       console.error(formData)
@@ -85,17 +103,27 @@ var getClinics = async function() {
   var newClinicSelection = document.getElementById("newClinic");
   removeOptions(newClinicSelection);
   var value = newDoctorSelection.value;
-  let url = 'http://127.0.0.1:5000/consultorios?doctor_crm='+value;
+
+  formData = new FormData()
+  formData.append("crm",value)
+  
+  let url = 'http://127.0.0.1:5000/encontrar_consultorio';
   fetch(url, {
-    method: 'get',
+    method: 'post',
+    body: formData
   })
     .then((response) => response.json())
     .then((data) => {
+      elementsMarked = document.getElementById("unavailable")
+      if (elementsMarked !== null){
+        document.querySelectorAll('[id^="unavailable"]').forEach(item => item.removeAttribute("id"))
+      }
       data.clinics.forEach(item => insertOptions("newClinic",item.Nome,item.id,findSchedules))
     })
     .catch((error) => {
       console.error('Error:', error);
     });
+  return request.response;
 };
 
 
@@ -109,10 +137,14 @@ const findSchedules = () => {
   newDoctorSelection = document.getElementById("newDoctor");
   newClinicSelection = document.getElementById("newClinic");
   doctor = newDoctorSelection.value;
-  clinica = newClinicSelection.value;
-  let url = 'http://127.0.0.1:5000/encontrar_agendamentos?doctor_crm='+doctor+'&clinic='+clinica;
-  fetch(url, {
-    method: 'get',
+  clinic = newClinicSelection.value;
+  formData = new FormData()
+  formData.append("doctor_crm",doctor)
+  formData.append("clinic_id",clinic)
+  let url = 'http://127.0.0.1:5000/encontrar_agendamentos';
+  request = fetch(url, {
+    method: 'post',
+    body: formData
   })
     .then((response) => response.json())
     .then((data) => {
@@ -123,6 +155,39 @@ const findSchedules = () => {
     .catch((error) => {
       console.error('Error:', error);
     });
+  return request.response;
+}
+
+
+/*
+  --------------------------------------------------------------------------------------
+  Função para obter um agendamento via POST
+  --------------------------------------------------------------------------------------
+*/
+const findSchedule = () => {
+  clinicSelection = document.getElementById("newClinic").value;
+  scheduleDate = document.getElementById("newScheduleDate").value;
+  scheduleTime = document.getElementById("newScheduleTime").value;
+
+
+  formData = new FormData()
+  formData.append("clinic",clinicSelection)
+  formData.append("schedule_date",scheduleDate)
+  formData.append("schedule_time",scheduleTime)
+  let url = 'http://127.0.0.1:5000/encontrar_agendamento';
+  console.log(url)
+
+  request = fetch(url, {
+    method: 'post',
+    body: formData
+  })
+    .then((response) => response.json())
+    .then((data) => { fillInfoCard(data); }
+    )
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  return request.response;
 }
 
 /*
@@ -137,6 +202,12 @@ const deleteItem = () => {
   scheduleTimeToDelete = document.getElementById('newScheduleTime').value;
   cpfToDelete = document.getElementById('newCPF').value;
 
+
+  formData = new FormData()
+  formData.append("clinic_id",clinicToDelete)
+  formData.append("schedule_date",scheduleDateToDelete)
+  formData.append("schedule_time",scheduleTimeToDelete)
+  formData.append("cpf",cpfToDelete)
   if (cpfToDelete === ''){
     alert("Por favor, informe seu CPF para deletarmos o agendamento")
     return;
@@ -145,12 +216,19 @@ const deleteItem = () => {
   if (clinicToDelete === '' | scheduleDateToDelete === '' | scheduleTimeToDelete === ''){
     alert("Por favor, selecione a clinica e o horário para prosserguimos com a exclusão")
   }
-  let url = 'http://127.0.0.1:5000/agendamento?clinic='+clinicToDelete+'&date='+scheduleDateToDelete+'&time='+scheduleTimeToDelete+'&cpf='+cpfToDelete;
-  fetch(url, {
-    method: 'delete'
+  let url = 'http://127.0.0.1:5000/agendamento';
+  request = fetch(url, {
+    method: 'delete',
+    body: formData
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if(response.status == "200"){
+        findCalendarElement(scheduleDateToDelete,scheduleTimeToDelete).removeAttribute("id")
+      }
+      response.json()
+    })
     .catch((error) => {
       console.error('Error:', error);
     });
+  return request.response;
 }

@@ -1,0 +1,25 @@
+.dim{
+  position: fixed;
+  height: 0;
+  width: 0;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.popup-container{
+  position: absolute;
+  z-index: 100;
+  width: fit-content;
+  height: fit-content;
+  background-color: #4E0090;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  border: black 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+}

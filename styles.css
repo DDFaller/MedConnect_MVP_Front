@@ -40,18 +40,22 @@ header {
 
 *{
     box-sizing: border-box;
-    margin: 0;
+    margin: auto;
     padding: 0;
+    z-index: 1;
 }
 
 .container{
     height: 100%;
     width: 100%;
     display: flex;
-    align-items: center;
     flex-direction: row;
+    margin: 0;
     margin-top: 2%;
+
     position: relative;
+    justify-content: center;
+    
 }
 
 h1,
@@ -70,8 +74,8 @@ h1 {
   font-weight: 800;
 }
 h3{
-    padding-top: 10%;
-    padding-left: 12%;
+    margin-top: 5%;
+    padding-left: 5%;
 }
 
 p {
@@ -84,7 +88,7 @@ p {
   width: 100%;
   padding:60px 0;
   text-align: center;
-  background: #3F51B5;
+  background: #450080;
   color: white;
 }
 
@@ -109,7 +113,7 @@ p {
 }
 
 .background {
-    background-color: #3F51B5;
+    background-color: #450080;
     color: #3F51B5;
     text-align: center;
     padding: 20px;
@@ -119,4 +123,11 @@ p {
     z-index: -1;
     height: 40%;
     bottom: 0;
+}
+
+.user-section{
+  display:inline;
+  margin-right: 0;
+  margin-left: auto;
+  margin-top: 0;
 }

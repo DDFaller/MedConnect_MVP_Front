@@ -1,16 +1,17 @@
 .doctorContainer{
-  margin-left: 5%;
+  background: linear-gradient(#4E0090,#7F27C9);
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
   border-radius: 30px;
-  width: 80%;
+  color: whitesmoke;
+  margin-bottom: auto;
   height: 100%;
   justify-content: center;
-  margin-top: 5%;
-  margin-bottom: auto;
-  background:linear-gradient(#007BFF,#00BCD4);
 }
 
 .wrapper{
-  padding:40px;
+  padding: 30px;
   font-size: 18px;
   width: fit-content;
 }
